@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
 
 
     <ImageButton
@@ -13,6 +13,27 @@
         android:layout_width="180dp"
         android:layout_height="96dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/start2"
-        android:onClick="startGame"/>
+        android:onClick="startGame"
+        android:src="@drawable/start2" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="?attr/actionModeCloseDrawable"
+        android:layout_marginTop="610dp"
+        android:minHeight="120dp"
+        android:minWidth="150dp"/>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="?attr/actionModeCloseDrawable"
+        android:rotation="180"
+        android:layout_marginTop="610dp"
+        android:layout_marginLeft="262dp"
+        android:minHeight="120dp"
+        android:minWidth="150dp"/>
+
 </RelativeLayout>

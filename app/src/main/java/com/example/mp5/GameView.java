@@ -56,9 +56,9 @@ public class GameView extends View {
         // Draw the background on canvas
         canvas.drawBitmap(background, null, rect, null);
         // Put Geof's handsome head at the center of the screen
-        canvas.drawBitmap(geof, dWith / 2 - geof.getWidth() / 2,
-                dHeight / 2 - geof.getHeight() / 2, null);
+        canvas.drawBitmap(geof, geofX, geofY, null);
         handler.postDelayed(runnable, UPDATE_MILLIS);
-
     }
+
+
 }
