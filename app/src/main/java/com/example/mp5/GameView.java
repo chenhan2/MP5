@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.view.MotionEvent;
 import android.view.View;
 import android.content.Context;
 import android.os.Handler;
 import android.view.Display;
 import android.graphics.Point;
+import android.widget.Button;
 
 
 public class GameView extends View {
@@ -19,14 +21,22 @@ public class GameView extends View {
     Runnable runnable;
     final int UPDATE_MILLIS = 30;
     Bitmap background;
+    Bitmap topTube, bottemTube;
     Display display;
     Point point;
     int dWith, dHeight; // Device width and height
     Rect rect;
     Bitmap geof;
     int velocity = 0;
-    int gravtiy = 10;
+    int gravity = 3;
     int geofX, geofY;
+    boolean gameState = false;
+    int gap = 400; // distance between upper and lower tubes
+    int minTubeOffset, maxTubeOffset;
+    int numberOfTubes = 4;
+    int distanceBetweenTubes;
+    int tubeX;
+    int topTubeY;
 
     public GameView(Context context) {
         super(context);
@@ -47,6 +57,9 @@ public class GameView extends View {
         geof = BitmapFactory.decodeResource(getResources(), R.drawable.geof);
         geofX = dWith / 2 - geof.getWidth() / 2;
         geofY = dHeight / 2 - geof.getHeight() / 2;
+        distanceBetweenTubes = dWith * 3 / 4;
+        minTubeOffset = gap / 2;
+        maxTubeOffset = dHeight - minTubeOffset - gap;
     }
 
     @Override
@@ -55,10 +68,32 @@ public class GameView extends View {
         // We'll draw our view inside onDraw()
         // Draw the background on canvas
         canvas.drawBitmap(background, null, rect, null);
+
+        if (gameState) {
+            // geof will not come back to the screen once he falls to the bottom
+            if (geofY < dHeight) {
+                velocity += gravity;// the falling speed is increasing by the effect of gravity
+                geofY += velocity;
+            }
+        }
         // Put Geof's handsome head at the center of the screen
         canvas.drawBitmap(geof, geofX, geofY, null);
         handler.postDelayed(runnable, UPDATE_MILLIS);
     }
 
+    //Get touch event
 
+    /**
+     * On touch.
+     * @param event
+     * @return true if we have done with the touch event and no further event is required
+     */
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) { // tap detected, then we want to move bird upward
+            velocity = -30; // set the upward speed to 30
+            gameState = true;
+        }
+        return true;
+    }
 }
