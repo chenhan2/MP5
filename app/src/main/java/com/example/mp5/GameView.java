@@ -13,6 +13,8 @@ import android.view.Display;
 import android.graphics.Point;
 import android.widget.Button;
 
+import java.util.Random;
+
 
 public class GameView extends View {
 
@@ -21,7 +23,7 @@ public class GameView extends View {
     Runnable runnable;
     final int UPDATE_MILLIS = 30;
     Bitmap background;
-    Bitmap topTube, bottemTube;
+    Bitmap toptube, bottomtube;
     Display display;
     Point point;
     int dWith, dHeight; // Device width and height
@@ -35,8 +37,10 @@ public class GameView extends View {
     int minTubeOffset, maxTubeOffset;
     int numberOfTubes = 4;
     int distanceBetweenTubes;
-    int tubeX;
-    int topTubeY;
+    int[] tubeX = new int[numberOfTubes];
+    int[] topTubeY = new int[numberOfTubes];
+    Random random;
+    int tubeVelocity = 8;
 
     public GameView(Context context) {
         super(context);
@@ -48,6 +52,8 @@ public class GameView extends View {
             }
         };
         background = BitmapFactory.decodeResource(getResources(), R.drawable.background);
+        toptube = BitmapFactory.decodeResource(getResources(), R.drawable.toptube);
+        bottomtube = BitmapFactory.decodeResource(getResources(), R.drawable.bottomtube);
         display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         point = new Point();
         display.getSize(point);
@@ -60,6 +66,11 @@ public class GameView extends View {
         distanceBetweenTubes = dWith * 3 / 4;
         minTubeOffset = gap / 2;
         maxTubeOffset = dHeight - minTubeOffset - gap;
+        random = new Random();
+        for (int i = 0; i < numberOfTubes; i++) {
+            tubeX[i] = dWith + i*distanceBetweenTubes ;
+            topTubeY[i] = minTubeOffset + random.nextInt(maxTubeOffset - minTubeOffset + 1);
+        }
     }
 
     @Override
@@ -74,6 +85,15 @@ public class GameView extends View {
             if (geofY < dHeight) {
                 velocity += gravity;// the falling speed is increasing by the effect of gravity
                 geofY += velocity;
+            }
+            for (int i = 0; i < numberOfTubes; i++) {
+                tubeX[i] -= tubeVelocity;
+                if (tubeX[i] < - toptube.getWidth()) {
+                    tubeX[i] += numberOfTubes * distanceBetweenTubes;
+                    topTubeY[i] = minTubeOffset + random.nextInt(maxTubeOffset - minTubeOffset + 1);
+                }
+                canvas.drawBitmap(toptube,tubeX[i],topTubeY[i] - toptube.getHeight(),null);
+                canvas.drawBitmap(bottomtube,tubeX[i],topTubeY[i]+gap,null);
             }
         }
         // Put Geof's handsome head at the center of the screen
