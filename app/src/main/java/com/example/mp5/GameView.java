@@ -29,10 +29,10 @@ public class GameView extends View {
     int dWith, dHeight; // Device width and height
     Rect rect;
     Bitmap geof;
-    int velocity = 0;
     int gravity = 3;
-    int geofX, geofY;
+    int velocity = 0;
     boolean gameState = false;
+    int geofX, geofY;
     int gap = 400; // distance between upper and lower tubes
     int minTubeOffset, maxTubeOffset;
     int numberOfTubes = 4;
@@ -86,14 +86,14 @@ public class GameView extends View {
                 velocity += gravity;// the falling speed is increasing by the effect of gravity
                 geofY += velocity;
             }
-            for (int i = 0; i < numberOfTubes; i++) {
-                tubeX[i] -= tubeVelocity;
-                if (tubeX[i] < - toptube.getWidth()) {
-                    tubeX[i] += numberOfTubes * distanceBetweenTubes;
-                    topTubeY[i] = minTubeOffset + random.nextInt(maxTubeOffset - minTubeOffset + 1);
+            for (int k = 0; k < numberOfTubes; k++) {
+                tubeX[k] = tubeX[k] - tubeVelocity;
+                if (tubeX[k] < - toptube.getWidth()) {
+                    tubeX[k] += numberOfTubes * distanceBetweenTubes;
+                    topTubeY[k] = minTubeOffset + random.nextInt(maxTubeOffset - minTubeOffset + 1);
                 }
-                canvas.drawBitmap(toptube,tubeX[i],topTubeY[i] - toptube.getHeight(),null);
-                canvas.drawBitmap(bottomtube,tubeX[i],topTubeY[i]+gap,null);
+                canvas.drawBitmap(toptube,tubeX[k],topTubeY[k] - toptube.getHeight(),null);
+                canvas.drawBitmap(bottomtube,tubeX[k],topTubeY[k]+gap,null);
             }
         }
         // Put Geof's handsome head at the center of the screen
@@ -111,8 +111,8 @@ public class GameView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) { // tap detected, then we want to move bird upward
-            velocity = -30; // set the upward speed to 30
             gameState = true;
+            velocity = -30; // set the upward speed to 30
         }
         return true;
     }
