@@ -3,7 +3,6 @@ package com.example.mp5;
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -12,6 +11,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppConstants.initialization(this.getApplicationContext());
     }
 
     public void startGame(View view) {

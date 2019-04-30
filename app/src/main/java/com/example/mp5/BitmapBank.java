@@ -13,10 +13,10 @@ public class BitmapBank {
         background = BitmapFactory.decodeResource(resource, R.drawable.background);
         background = scaleImage(background);
         geoff = new Bitmap[4];
-        geoff[0] = BitmapFactory.decodeResource(resource, R.drawable.bird_frame1);
-        geoff[1] = BitmapFactory.decodeResource(resource, R.drawable.bird_frame2);
-        geoff[2] = BitmapFactory.decodeResource(resource, R.drawable.bird_frame3);
-        geoff[3] = BitmapFactory.decodeResource(resource, R.drawable.bird_frame4);
+        geoff[0] = BitmapFactory.decodeResource(resource, R.drawable.geof);
+        geoff[1] = BitmapFactory.decodeResource(resource, R.drawable.geof);
+        geoff[2] = BitmapFactory.decodeResource(resource, R.drawable.geof);
+        geoff[3] = BitmapFactory.decodeResource(resource, R.drawable.geof);
         tubeTop = BitmapFactory.decodeResource(resource, R.drawable.tube_top);
         tubeBottom = BitmapFactory.decodeResource(resource, R.drawable.tube_bottom);
     }
@@ -68,5 +68,13 @@ public class BitmapBank {
     public int getBackgroundHeight(){
         return background.getHeight();
     }
+
+    public Bitmap scaleImage(Bitmap bitmap) {
+        float widthHeightRatio = getBackgroundWidth() / getBackgroundHeight();
+        int backgroundScaledWidth = (int) widthHeightRatio * AppConstants.SCREEN_HEIGHT;
+        return Bitmap.createScaledBitmap(bitmap,
+                backgroundScaledWidth, AppConstants.SCREEN_HEIGHT, false);
+    }
 }
+
 

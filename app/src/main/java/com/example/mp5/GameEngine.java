@@ -19,8 +19,9 @@ public class GameEngine {
                 backgroundImage.getX(), backgroundImage.getY(), null);
         if (backgroundImage.getX() < (AppConstants.SCREEN_WIDTH
                 - AppConstants.getBitmapBank().getBackgroundWidth())) {
-            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground(), backgroundImage.getX()
-                + AppConstants.getBitmapBank().getBackgroundWidth(), backgroundImage.getY(), null);
+            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground(),
+                    backgroundImage.getX() + AppConstants.getBitmapBank().getBackgroundWidth(),
+                    backgroundImage.getY(), null);
         }
     }
 }
