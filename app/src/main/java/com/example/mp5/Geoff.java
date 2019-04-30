@@ -4,8 +4,8 @@ public class Geoff {
     private int geoffX, geoffY, currentFrame, velocity;
     public static int maxFrame;
     public Geoff() {
-        geoffX = AppConstants.SCREEN_WIDTH/2 - AppConstants.getBitmapBank().getBirdWidth()/2;
-        geoffX = AppConstants.SCREEN_HEIGHT/2 - AppConstants.getBitmapBank().getBirdHeight()/2;
+        geoffX = AppConstants.SCREEN_WIDTH/2 - AppConstants.getBitmapBank().getGeoffWidth()/2;
+        geoffX = AppConstants.SCREEN_HEIGHT/2 - AppConstants.getBitmapBank().getGeoffHeight()/2;
         currentFrame = 0;
         maxFrame = 3;
         velocity = 0;
