@@ -42,4 +42,18 @@ public class GameThread extends Thread {
             }
         }
     }
+
+    //Return whether teh thread is running
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    /**
+     * Set the trhead state ,
+     * false: stopped
+     * true: running
+     */
+    public void setIsRunning(boolean state) {
+        isRunning = state;
+    }
 }
